@@ -19,6 +19,17 @@ function validarCampoTexto(input){
 	$(input).parent().append(span_nombre);
 }
 
+function validarTwitter(input){
+	var mensaje = "";
+	if($(input).val() == ""){
+		mensaje += "Campo Obligatorio";
+	}
+
+	$(input).siblings().filter("span").remove();
+	var span_nombre = $("<span>" + mensaje + "</span>");
+	$(input).parent().append(span_nombre);
+}
+
 function validarCampoEmail(input){
 	var mensaje = "";
 	if($(input).val() == ""){
@@ -71,6 +82,8 @@ $( ".form-signup" ).submit(function(e) {
   		validarCampoEmail($(this));
   	}else if($(this).attr('type') == 'password'){
   		validarCampoContrasena($(this));
+  	}else if($(this).attr('type') == 'twitter'){
+  		validarTwitter($(this));
   	}
   })
   $(".form-control *").filter(":selected").each(function(){
