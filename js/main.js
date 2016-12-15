@@ -9,8 +9,8 @@ function validarCampoTexto(input){
 		if($(input).val().charAt(0).toUpperCase() != $(input).val().charAt(0)){
 			mensaje += "Primera letra en mayúscula";
 		}
-		if( ($(input).val().match(/^[a-zA-Z]+$/))){
-			mensaje += "solo debo tener letras";
+		if(!($(input).val().match(/^[a-zA-Z]+$/))){
+			mensaje += "Solo debe tener letras";
 		}
 	}
 
@@ -33,7 +33,7 @@ function validarCampoEmail(input){
 	$(input).parent().append(span_nombre);
 }
 
-function validarCampoContraseña(input){
+function validarCampoContrasena(input){
 	var mensaje = "";
 	if($(input).val() == ""){
 		mensaje += "Campo Obligatorio";
@@ -42,7 +42,7 @@ function validarCampoContraseña(input){
 			mensaje += "Debe tener más de 6 caracteres";
 		}
 
-		if($(input).val()=="password"||123456||098754){
+		if($(input).val()=="password"||$(input).val()==123456||$(input).val()==098754){
 			mensaje += "El campo contraseña no puede ser igual a 'password' o '123456' o '098754'";
 		}
 	}
@@ -51,17 +51,15 @@ function validarCampoContraseña(input){
 	$(input).parent().append(span_nombre);
 }
 
-function validarCampoCheckbox(input){
+function validarSelect(selected){
 	var mensaje = "";
-	if($(input).val() /**/){
-		mensaje += "Debe seleccionar al menos un tipo de bici.";
+	if ($(".form-control:eq(4)").val()==0){
+		mensaje += "Debes seleccionar un elemento de la lista";
 	}
-	$(input).siblings().filter("span").remove();
+	$(".form-control:eq(4)").siblings().filter("span").remove();
 	var span_nombre = $("<span>" + mensaje + "</span>");
-	$(input).parent().append(span_nombre);
+	$(".form-control:eq(4)").parent().append(span_nombre);
 }
-
-
 
 $( ".form-signup" ).submit(function(e) {
   e.preventDefault();
@@ -72,9 +70,22 @@ $( ".form-signup" ).submit(function(e) {
   	}else if($(this).attr('type') == 'email'){
   		validarCampoEmail($(this));
   	}else if($(this).attr('type') == 'password'){
-  		validarCampoContraseña($(this));
-  	}else if($(this).attr('type') =='checkbox'){
-  		validarCampoCheckbox($(this));
+  		validarCampoContrasena($(this));
   	}
   })
+  $(".form-control *").filter(":selected").each(function(){
+  		validarSelect($(this));
+  })
 });
+
+
+/*function validarCampoCheckbox(input){
+	var mensaje = "";
+	if(!($(input).is(':checked'))) {  
+    	 
+    }
+}*/
+
+/*else if($(this).attr('type') =='checkbox'){
+	validarCampoCheckbox($(this));
+}*/
