@@ -76,11 +76,10 @@ function validarCampoCheckbox(input){
 	var mensaje = "";
 	if(!($(input).is(':checked'))) {  
     	mensaje += "Debes seleccionar el checkbox";
-    	alert("Debe seleccionar el checkbox");
     }
-    $(".form-control:eq(4)").siblings().filter("span").remove();
+    $(input).siblings().filter("span").remove();
 	var span_nombre = $("<span>" + mensaje + "</span>");
-	$(".form-control:eq(4)").parent().append(span_nombre);
+	$(input).parent().append(span_nombre);
 }
 
 $( ".form-signup" ).submit(function(e) {
