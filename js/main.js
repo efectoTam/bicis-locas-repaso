@@ -72,6 +72,17 @@ function validarSelect(selected){
 	$(".form-control:eq(4)").parent().append(span_nombre);
 }
 
+function validarCampoCheckbox(input){
+	var mensaje = "";
+	if(!($(input).is(':checked'))) {  
+    	mensaje += "Debes seleccionar el checkbox";
+    	alert("Debe seleccionar el checkbox");
+    }
+    $(".form-control:eq(4)").siblings().filter("span").remove();
+	var span_nombre = $("<span>" + mensaje + "</span>");
+	$(".form-control:eq(4)").parent().append(span_nombre);
+}
+
 $( ".form-signup" ).submit(function(e) {
   e.preventDefault();
   $(".form-signup *").filter(":input").each(function(){
@@ -84,21 +95,11 @@ $( ".form-signup" ).submit(function(e) {
   		validarCampoContrasena($(this));
   	}else if($(this).attr('type') == 'twitter'){
   		validarTwitter($(this));
-  	}
+  	}else if($(this).attr('type') =='checkbox'){
+	validarCampoCheckbox($(this));
+}
   })
   $(".form-control *").filter(":selected").each(function(){
   		validarSelect($(this));
   })
 });
-
-
-/*function validarCampoCheckbox(input){
-	var mensaje = "";
-	if(!($(input).is(':checked'))) {  
-    	 
-    }
-}*/
-
-/*else if($(this).attr('type') =='checkbox'){
-	validarCampoCheckbox($(this));
-}*/
